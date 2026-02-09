@@ -1,7 +1,7 @@
 import streamlit as st
-import requests
+
 import re
-import uuid
+
 
 # ================= CONFIG =================
 API_URL = "http://127.0.0.1:5000/emails"
@@ -24,13 +24,25 @@ st.markdown(
 
 # ================= LOAD EMAILS =================
 def load_emails():
-    try:
-        res = requests.get(API_URL, timeout=30)
-        res.raise_for_status()
-        return res.json()
-    except Exception as e:
-        st.error(f"❌ Cannot connect to Flask API: {e}")
-        return []
+    # Demo emails for Streamlit Cloud
+    return [
+        {
+            "from": "college@university.edu",
+            "subject": "Urgent: Assignment Deadline Tomorrow",
+            "snippet": "Please submit your assignment before 11:59 PM tonight."
+        },
+        {
+            "from": "internship@company.com",
+            "subject": "Interview Schedule",
+            "snippet": "Your interview is scheduled for next Monday at 10 AM."
+        },
+        {
+            "from": "newsletter@shopping.com",
+            "subject": "Big Sale This Weekend",
+            "snippet": "Enjoy up to 70% off on selected items."
+        }
+    ]
+
 
 # ================= REFRESH BUTTON =================
 col_refresh_left, col_refresh_right = st.columns([8, 1])
